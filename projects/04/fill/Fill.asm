@@ -37,8 +37,8 @@ M=0
 	D=D-A
 	@SECONDCOND
 	D;JEQ
-
 	(JUMPBACKAFTERSETTINGN)
+	
 	// if KBD != 0 (which means keys are pressed), goto BLACKEN
 	@KBD
 	D=M
