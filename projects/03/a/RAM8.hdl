@@ -30,15 +30,5 @@ CHIP RAM8 {
 	Mux8Way16(a=r1out ,b=r2out ,c=r3out ,d=r4out ,e=r5out ,f=r6out ,g=r7out ,h=r8out ,sel=address ,out=out );
 
 	// write
-	DMux8Way(in=true ,sel=address ,a=r1 ,b=r2 ,c=r3 ,d=r4 ,e=r5 ,f=r6 ,g=r7 ,h=r8 );
-	
-	Mux(a=false ,b=load ,sel=r1 ,out=load1 );
-	Mux(a=false ,b=load ,sel=r2 ,out=load2 );
-	Mux(a=false ,b=load ,sel=r3 ,out=load3 );
-	Mux(a=false ,b=load ,sel=r4 ,out=load4 );
-
-	Mux(a=false ,b=load ,sel=r5 ,out=load5 );
-	Mux(a=false ,b=load ,sel=r6 ,out=load6 );
-	Mux(a=false ,b=load ,sel=r7 ,out=load7 );
-	Mux(a=false ,b=load ,sel=r8 ,out=load8 );
+	DMux8Way(in=load ,sel=address ,a=load1 ,b=load2 ,c=load3 ,d=load4 ,e=load5 ,f=load6 ,g=load7 ,h=load8 );
 }
