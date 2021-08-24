@@ -23,10 +23,5 @@ CHIP RAM16K {
 
 	Mux4Way16(a=RAM1out ,b=RAM2out ,c=RAM3out ,d=RAM4out ,sel=address[12..13] ,out=out );
 	
-	DMux4Way(in=true ,sel=address[12..13] ,a=RAM1 ,b=RAM2 ,c=RAM3 ,d=RAM4 );
-
-	Mux(a=false ,b=load ,sel=RAM1 ,out=load1 );
-	Mux(a=false ,b=load ,sel=RAM2 ,out=load2 );
-	Mux(a=false ,b=load ,sel=RAM3 ,out=load3 );
-	Mux(a=false ,b=load ,sel=RAM4 ,out=load4 );
+	DMux4Way(in=load ,sel=address[12..13] ,a=load1 ,b=load2 ,c=load3 ,d=load4 );
 }

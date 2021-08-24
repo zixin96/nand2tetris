@@ -29,15 +29,5 @@ CHIP RAM64 {
 
 	Mux8Way16(a=RAM1out ,b=RAM2out ,c=RAM3out ,d=RAM4out ,e=RAM5out ,f=RAM6out ,g=RAM7out ,h=RAM8out ,sel=address[3..5] ,out=out );
 	
-	DMux8Way(in=true ,sel=address[3..5] ,a=RAM1 ,b=RAM2 ,c=RAM3 ,d=RAM4 ,e=RAM5 ,f=RAM6 ,g=RAM7 ,h=RAM8 );
-
-	Mux(a=false ,b=load ,sel=RAM1 ,out=load1 );
-	Mux(a=false ,b=load ,sel=RAM2 ,out=load2 );
-	Mux(a=false ,b=load ,sel=RAM3 ,out=load3 );
-	Mux(a=false ,b=load ,sel=RAM4 ,out=load4 );
-
-	Mux(a=false ,b=load ,sel=RAM5 ,out=load5 );
-	Mux(a=false ,b=load ,sel=RAM6 ,out=load6 );
-	Mux(a=false ,b=load ,sel=RAM7 ,out=load7 );
-	Mux(a=false ,b=load ,sel=RAM8 ,out=load8 );
+	DMux8Way(in=load ,sel=address[3..5] ,a=load1 ,b=load2 ,c=load3 ,d=load4 ,e=load5 ,f=load6 ,g=load7 ,h=load8 );
 }
