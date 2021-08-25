@@ -7,8 +7,8 @@ M=0
 	D=D-M
 	@END
 	D;JEQ
-	@SCREEN
-	D=A
+	@R0
+	D=M
 	@n
 	A=D+M
 	M=-1

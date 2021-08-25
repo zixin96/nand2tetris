@@ -73,7 +73,7 @@ M=0
 		D;JEQ
 		// *(SCREEN + n) = -1
 		@SCREEN
-		D=A // Notice here we use D=A, instead of D=M. Since we want to assign @SCREEN (an address) to D, not the content at this address. (which should be zero b/c the screen is intially white)
+		D=A // Notice here we use D=A, instead of D=M. Since we want to assign @SCREEN (an address) to D, not the content at this address (as shown in Figure 4.7, which should be zero b/c the screen is intially white)
 		@n
 		A=D+M // A now holds the right address, waiting for us to put -1 into it
 		M=-1 // Put -1 into it
