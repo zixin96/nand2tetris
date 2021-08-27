@@ -40,9 +40,32 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
-    Mux16(a=ALUOut ,b=instruction ,sel=NotInst15 ,out=m1out );
+    Mux16(a=ALUOut ,b=instruction ,sel=NotInst15 ,out=m1out ); //Mux16A
     Not(in=instruction[15] ,out=NotInst15 );
 
-    Or(a=instruction[5] ,b=NotInst15 ,out=Or1Out );
-    ARegister(in=m1out ,load=Or1Out ,out=ARegistOut ); 
+    And(a=instruction[5] ,b=instruction[15] ,out=a1 );
+    Or(a=a1 ,b=NotInst15 ,out=Or1Out );
+
+    ARegister(in=m1out ,load=Or1Out ,out=ARegistOut, out[0..14]=addressM ); 
+    And(a=instruction[3] ,b=instruction[15] ,out=writeM );
+
+
+    Mux16(a=ARegistOut ,b=inM ,sel=instruction[12] ,out=m2out ); //Mux16B
+    ALU(x=DRegistOut ,y=m2out ,zx=instruction[11] ,nx=instruction[10] ,zy=instruction[9] ,ny=instruction[8] ,f=instruction[7] ,no=instruction[6] ,out=ALUOut, out=outM ,zr=ZeroOut ,ng=NgOut );
+    And(a=instruction[4] ,b=instruction[15] ,out=a2 );
+    DRegister(in=ALUOut ,load=a2 ,out=DRegistOut );
+
+    PC(in=ARegistOut ,load=LoadDMuxOut ,inc=IncDMuxOut ,reset=reset ,out[0..14]=pc ); 
+
+    Not(in=NgOut ,out=NotNgOut );
+    Not(in=ZeroOut ,out=NotZeroOut );
+    And(a=NotNgOut ,b=NotZeroOut ,out=PoOut );
+
+    And(a=NgOut ,b=instruction[2] ,out=And1Out );
+    And(a=ZeroOut ,b=instruction[1] ,out=And2Out );
+    And(a=PoOut ,b=instruction[0] ,out=And3Out );
+    Or(a=And1Out ,b=And2Out ,out=OrJumpOut );
+    Or(a=OrJumpOut ,b=And3Out ,out=OrResultOut );
+    And(a=instruction[15], b=OrResultOut, out=OrResultOut1);
+    DMux(in=true ,sel=OrResultOut1 ,a=IncDMuxOut ,b=LoadDMuxOut ); 
 }
